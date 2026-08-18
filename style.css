@@ -68,7 +68,7 @@ p  { color: var(--muted); font-size: 14.5px; line-height: 1.7; font-weight: 300;
 .nav {
 	display: flex;
 	align-items: center;
-	gap: 30px;
+	gap: 16px;
 	padding: 24px var(--gutter);
 }
 
@@ -81,7 +81,7 @@ p  { color: var(--muted); font-size: 14.5px; line-height: 1.7; font-weight: 300;
 }
 .logo span { color: var(--periwinkle); }
 
-.nav-links { display: flex; gap: 26px; }
+.nav-links { display: flex; gap: 26px; margin-left: 16px; }
 .nav-links a {
 	position: relative;
 	font-size: 13.5px;
@@ -104,7 +104,8 @@ p  { color: var(--muted); font-size: 14.5px; line-height: 1.7; font-weight: 300;
 }
 .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
 
-.nav-right { display: flex; align-items: center; gap: 14px; margin-left: auto; }
+/* Qidiruv va tugma o'ng chekkaga suriladi */
+.search-wrap { position: relative; margin-left: auto; }
 
 .search {
 	display: flex;
@@ -126,6 +127,77 @@ p  { color: var(--muted); font-size: 14.5px; line-height: 1.7; font-weight: 300;
 	color: var(--ink);
 }
 .search svg { color: var(--muted); width: 17px; height: 17px; }
+
+/* --- Qidiruv natijalari --- */
+.results {
+	position: absolute;
+	top: calc(100% + 10px);
+	right: 0;
+	width: min(340px, 88vw);
+	max-height: 350px;
+	overflow-y: auto;
+	z-index: 60;
+	background: #fff;
+	border-radius: 18px;
+	padding: 8px;
+	box-shadow: 0 24px 60px rgba(20, 40, 60, .2);
+	animation: dropIn .28s cubic-bezier(.22,.61,.36,1);
+}
+@keyframes dropIn {
+	from { opacity: 0; transform: translateY(-8px); }
+}
+
+.result {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	width: 100%;
+	padding: 9px 10px;
+	border: none;
+	border-radius: 12px;
+	background: none;
+	font-family: inherit;
+	text-align: left;
+	cursor: pointer;
+	transition: background .2s;
+}
+.result:hover, .result.active { background: var(--soft); }
+
+.result img {
+	flex: 0 0 auto;
+	width: 44px; height: 44px;
+	border-radius: 10px;
+}
+
+.result-text { flex: 1; min-width: 0; display: block; }
+.result-text b {
+	display: block;
+	font-size: 13.5px;
+	font-weight: 600;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.result-text small {
+	display: block;
+	font-size: 11px;
+	color: var(--muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.result mark { background: #ffe9b8; color: inherit; border-radius: 3px; }
+
+.result-price { margin-left: auto; font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+
+.no-result { padding: 16px 12px; font-size: 13px; color: var(--muted); text-align: center; }
+
+/* Tanlangan karta bir lahza yonib qo'yadi */
+@keyframes flash {
+	0%, 100% { box-shadow: 0 0 0 0 rgba(147,167,203,0); }
+	30%      { box-shadow: 0 0 0 5px rgba(147,167,203,.85); }
+}
+.flash { animation: flash 1.5s ease-out; }
 
 /* ============ HERO ============ */
 .hero {
@@ -479,8 +551,12 @@ p  { color: var(--muted); font-size: 14.5px; line-height: 1.7; font-weight: 300;
 }
 
 @media (max-width: 700px) {
-	.nav { gap: 14px; }
-	.search { display: none; }
+	/* Telefonda: 1-qator logo va tugma, 2-qator to'liq kenglikdagi qidiruv */
+	.nav { gap: 14px; flex-wrap: wrap; }
+	.nav-cta { margin-left: auto; }
+	.search-wrap { order: 3; width: 100%; margin-left: 0; }
+	.search input { width: 100%; }
+	.results { width: 100%; }
 	.hero { height: 460px; min-height: 0; }
 	.hero-title { letter-spacing: -2px; }
 	.hero-title sup { top: -2.4em; }

@@ -27,13 +27,17 @@
 			<a href="#about">Biz haqimizda</a>
 		</nav>
 
-		<div class="nav-right">
+		<div class="search-wrap">
 			<label class="search">
-				<input type="text" placeholder="Shahar yoki yo'nalish qidiring...">
+				<input type="text" id="searchInput" autocomplete="off" role="combobox"
+				       aria-expanded="false" aria-controls="searchResults"
+				       placeholder="Shahar yoki yo'nalish qidiring...">
 				<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
 			</label>
-			<a href="#packages" class="btn btn-dark">Band qilish</a>
+			<div class="results" id="searchResults" role="listbox" hidden></div>
 		</div>
+
+		<a href="#packages" class="btn btn-dark nav-cta">Band qilish</a>
 	</header>
 
 	<!-- ================= HERO ================= -->
